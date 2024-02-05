@@ -1,8 +1,12 @@
 "use client";
 import { useState } from "react";
 import Loader from "../shared/loader";
+type Props = {
+  currentStep: number;
+  setStep: Function;
+};
 
-const Calendar = ({ currentStep, setStep }: any) => {
+const Calendar = ({ currentStep, setStep }: Props) => {
   var [calendarConnected, setCalendar] = useState(false);
   var [connecting, setConnection] = useState(false);
   function connectCalendar() {

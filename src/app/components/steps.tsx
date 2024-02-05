@@ -1,7 +1,12 @@
 
 import NextSVG from "./shared/nextIcon";
 
-function Step({setStep, activeStep}: any) {
+type Props = {
+  setStep: Function, 
+  activeStep: number
+}
+
+function Step({setStep, activeStep}: Props) {
 
   var styling = {
     active: {

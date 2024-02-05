@@ -1,18 +1,25 @@
 // import { DefaultColorsModel } from "@/app/models/defaultColors";
 
+import { CustomConfigurations } from "@/app/models/defaultConfigs";
 import { defaultColors } from "@/app/modules/defaultStyles";
 
-// type Props = {
-//     formData: keyof DefaultColorsModel["upcoming"]; // Use keyof to restrict 'type' to valid keys of DefaultColors
-//   };
+type Props = {
+   formData:  CustomConfigurations,
+  refreshForm: Function,
+  customizationStep: number,
+  nextCustomStep: Function,
+  setCustomizeCompletion: Function,
+  submitForm: Function,
+  };
 
 const Display = ({
   formData,
   refreshForm,
   customizationStep,
   nextCustomStep,
-  setCustomizeCompletion
-}: any) => {
+  setCustomizeCompletion,
+  submitForm
+}: Props) => {
   return (
     <div
       className="w-full p-4 mr-4 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col justify-between "
@@ -66,12 +73,15 @@ const Display = ({
       <button
         type="button"
         onClick={() => {
+          submitForm();
           if(customizationStep < Object.keys(defaultColors).length  -1){
+          
             nextCustomStep(customizationStep + 1);
              refreshForm(customizationStep + 1);
           }
           else{
             setCustomizeCompletion(true);
+          
           }
          
         }}
