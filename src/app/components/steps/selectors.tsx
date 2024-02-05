@@ -2,47 +2,67 @@
 import { useState } from "react";
 import Display from "./display";
 import { defaultColors } from "@/app/modules/defaultStyles";
-import { DefaultColorsModel } from "@/app/models/defaultColors";
-  
-  type Props = {
-    type: keyof DefaultColorsModel; // Use keyof to restrict 'type' to valid keys of DefaultColors
-    customizationStep: any;
-    nextCustomStep: any;
-    setCustomizeCompletion: any
+import { DefaultColorsModel, DefaultResults } from "@/app/models/defaultConfigs";
+
+type Props = {
+  type: keyof DefaultColorsModel; // Use keyof to restrict 'type' to valid keys of DefaultColors
+  customizationStep: number;
+  nextCustomStep: Function;
+  setCustomizeCompletion: Function;
+  setResults: Function;
+  result: DefaultResults;
+};
+const Selector = ({
+  type,
+  customizationStep,
+  nextCustomStep,
+  setCustomizeCompletion,
+  setResults,
+  result
+}: Props) => {
+  const [formData, setFormData] = useState({
+    borderColor: defaultColors[type].borderColor,
+    borderWidth: defaultColors[type].borderWidth,
+    textColor: defaultColors[type].textColor,
+    textSize: defaultColors[type].textSize,
+    backgroundColor: defaultColors[type].backgroundColor,
+    borderRadius: defaultColors[type].borderRadius,
+    canvasColor: defaultColors[type].canvasColor,
+  });
+
+  const handleChange = (e: any) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value
+    }));
   };
-const Selector = ({type, customizationStep, nextCustomStep, setCustomizeCompletion}: Props) => {
-    const [formData, setFormData] = useState({
-        borderColor: defaultColors[type].borderColor,
-        borderWidth: defaultColors[type].borderWidth,
-        textColor: defaultColors[type].textColor,
-        textSize: defaultColors[type].textSize,
-        backgroundColor: defaultColors[type].backgroundColor,
-        borderRadius: defaultColors[type].borderRadius,
-        canvasColor: "#e0e0e0"
-      });
 
-      const handleChange = (e: any) => {
-        const { id, value } = e.target;
-        setFormData((prevData) => ({
-          ...prevData,
-          [id]: value,
-        }));
-      };
+  function refreshForm(idx: any) {
+    var precompType = Object.keys(defaultColors)[
+      idx
+    ] as keyof DefaultColorsModel;
+    setFormData({
+      borderColor: defaultColors[precompType].borderColor,
+      borderWidth: defaultColors[precompType].borderWidth,
+      textColor: defaultColors[precompType].textColor,
+      textSize: defaultColors[precompType].textSize,
+      backgroundColor: defaultColors[precompType].backgroundColor,
+      borderRadius: defaultColors[precompType].borderRadius,
+      canvasColor: defaultColors[precompType].canvasColor,
+    });
+  }
 
-      function refreshForm(idx: any){
-        var precompType = Object.keys(defaultColors)[idx] as keyof DefaultColorsModel;
-        setFormData({
-            borderColor: defaultColors[precompType].borderColor,
-            borderWidth: defaultColors[precompType].borderWidth,
-            textColor: defaultColors[precompType].textColor,
-            textSize: defaultColors[precompType].textSize,
-            backgroundColor: defaultColors[precompType].backgroundColor,
-            borderRadius: defaultColors[precompType].borderRadius,
-            canvasColor: "#e0e0e0"
-          })
-      }
-    
-
+  const submitForm = () => {
+    const prev = result;
+    const customizationCopy = result?.customization ?? {};
+    const customizationNew = { ...customizationCopy, [type]: formData };
+    const newResults = {
+      ...prev,
+      customization: customizationNew
+    }
+    setResults({...newResults});
+  };
   return (
     <div className="w-full grid grid-cols-9 gap-4">
       <div className="p-4 col-span-3">
@@ -152,10 +172,14 @@ const Selector = ({type, customizationStep, nextCustomStep, setCustomizeCompleti
       </div>
       <div className="col-span-1"></div> {/* Spacing */}
       <div className="p-4 col-span-5">
-  
-        <Display formData={formData} refreshForm={refreshForm} customizationStep={customizationStep}
-            nextCustomStep={nextCustomStep}
-            setCustomizeCompletion={setCustomizeCompletion}/>
+        <Display
+          formData={formData}
+          refreshForm={refreshForm}
+          customizationStep={customizationStep}
+          nextCustomStep={nextCustomStep}
+          setCustomizeCompletion={setCustomizeCompletion}
+          submitForm={submitForm}
+        />
       </div>
     </div>
   );

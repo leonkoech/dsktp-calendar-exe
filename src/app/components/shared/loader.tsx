@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-
-const Loader = ({sizeLoader}: any) => {
+type Props = {
+  sizeLoader: number
+}
+const Loader = ({sizeLoader}: Props) => {
   const [size, setSize] = useState(sizeLoader);
 
   useEffect(() => {

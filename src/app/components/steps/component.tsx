@@ -2,8 +2,16 @@
 import { useState } from "react";
 import Customize from "./customize";
 import { defaultColors } from "@/app/modules/defaultStyles";
+import { DefaultColorsModel, DefaultResults } from "@/app/models/defaultConfigs";
 
-const Component = ({ currentStep, setStep }: any) => {
+type Props = {
+  currentStep: number;
+  setStep: Function;
+  setResults: Function;
+  result: DefaultResults;
+};
+
+const Component = ({ currentStep, setStep, setResults, result }: Props) => {
   const [customizationStep, nextCustomStep] = useState(0);
   const [customizeActivated, setCustomizeActivity] = useState(false);
   const [customizeCompleted, setCustomizeCompletion] = useState(false);
@@ -14,11 +22,12 @@ const Component = ({ currentStep, setStep }: any) => {
         customizeCompleted ? (
           <div className="w-4/5">
             <span className="text-xs">
-              You completed setting up your component, congrats!<br></br> <br></br> <br></br> 
+              You completed setting up your component, congrats!<br></br>{" "}
+              <br></br> <br></br>
             </span>
             <button
               type="button"
-              onClick={() => setStep(currentStep+1)}
+              onClick={() => setStep(currentStep + 1)}
               className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-xs px-12 py-1.5 text-center me-2 mb-2"
             >
               Next
@@ -26,10 +35,12 @@ const Component = ({ currentStep, setStep }: any) => {
           </div>
         ) : (
           <Customize
-            type={Object.keys(defaultColors)[customizationStep]}
+            type={Object.keys(defaultColors)[customizationStep] as keyof DefaultColorsModel}
             customizationStep={customizationStep}
             nextCustomStep={nextCustomStep}
-            setCustomizeCompletion = {setCustomizeCompletion}
+            setCustomizeCompletion={setCustomizeCompletion}
+            result={result}
+            setResults={setResults}
           />
         )
       ) : (

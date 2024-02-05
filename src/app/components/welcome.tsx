@@ -1,7 +1,14 @@
 "use client";
 import terms from "../modules/terms";
+import React from "react";
 
-const Welcome = ({ termsBool, setTerms, setSetup }: any) => {
+type Props = {
+  termsBool: boolean, 
+  setTerms: Function, 
+  setSetup:  any;
+}
+const Welcome = ({ termsBool, setTerms, setSetup }: Props) => {
+
   return (
     <>
       <div className="flex flex-grow w-full flex-col justify-between content-evenly items-center p-3 space-x-2 text-sm font-medium text-center">
