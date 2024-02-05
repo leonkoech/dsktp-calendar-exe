@@ -5,10 +5,12 @@ import React from "react";
 type Props = {
   termsBool: boolean, 
   setTerms: Function, 
-  setSetup:  any;
+  setSetup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const Welcome = ({ termsBool, setTerms, setSetup }: Props) => {
-
+  const setSetupLocal: React.MouseEventHandler<HTMLButtonElement> = () => {
+    setSetup((prevSetup) => !prevSetup);
+  };
   return (
     <>
       <div className="flex flex-grow w-full flex-col justify-between content-evenly items-center p-3 space-x-2 text-sm font-medium text-center">
@@ -58,7 +60,7 @@ const Welcome = ({ termsBool, setTerms, setSetup }: Props) => {
           {termsBool ? (
             <button
               type="button"
-              onClick={setSetup}
+              onClick={setSetupLocal}
               disabled={!termsBool}
               className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-xs px-12 py-1.5 text-center me-2 mb-2"
             >
