@@ -4,13 +4,17 @@ import Loader from "../shared/loader";
 type Props = {
   currentStep: number;
   setStep: Function;
+  calendarAPI: Function;
 };
 
-const Calendar = ({ currentStep, setStep }: Props) => {
+const Calendar = ({ currentStep, setStep, calendarAPI }: Props) => {
   var [calendarConnected, setCalendar] = useState(false);
   var [connecting, setConnection] = useState(false);
   function connectCalendar() {
     // setConnection(true);
+    calendarAPI().then((result: any)=>{
+      console.log(result)
+    })
     setCalendar(true);
   }
   return (
