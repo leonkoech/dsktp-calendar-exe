@@ -26,6 +26,7 @@ type InputCustomization = {
   id: keyof (CustomConfigurations | CustomOptions);
   type: string;
   pattern: string | undefined;
+  readonly: boolean | undefined;
 };
 
 type DefaultResults = {

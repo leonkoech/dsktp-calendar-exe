@@ -8,9 +8,10 @@ type Props = {
   input: InputCustomization;
   formData: CustomConfigurations | CustomOptions;
   handleChange: any;
+  readonly?: boolean;
 };
 
-const InputField = ({ input, formData, handleChange }: Props) => {
+const InputField = ({ input, formData, handleChange, readonly }: Props) => {
   return (
     <div>
       <label className="block my-1 text-xs font-medium text-gray-900 dark:text-white">
@@ -24,6 +25,7 @@ const InputField = ({ input, formData, handleChange }: Props) => {
         pattern={input.pattern}
         value={formData[`${input.id}`] as string}
         onChange={handleChange}
+        readOnly={readonly}
         required
       ></input>
     </div>
