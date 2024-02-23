@@ -32,12 +32,10 @@ export default function Home() {
   const isServerRunning = () => {
     CheckServerStatusAPI().then((value: boolean) => {
       setRunning(value);
-      console.log(value);
-      console.log(isRunning);
     });
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12">
+    <main className="flex min-h-screen flex-col items-center justify-between p-5">
       {isRunning ? (
         terms && setup ? (
           <>

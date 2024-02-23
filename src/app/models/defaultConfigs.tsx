@@ -10,7 +10,7 @@ type CustomConfigurations = {
   borderColor: string;
   borderWidth: number;
   textColor: string;
-  textSize: number;
+  textSize?: number;
   backgroundColor: string;
   borderRadius: number;
   canvasColor: string;

@@ -12,7 +12,6 @@ const defaultColors: DefaultColorsModel = {
     borderColor: "rgba(47,47,47,255)",
     borderWidth: 0.5,
     textColor: "#2C2C2C",
-    textSize: 11,
     backgroundColor: "rgba(47,47,47,0)",
     borderRadius: 10,
     canvasColor:
@@ -22,7 +21,6 @@ const defaultColors: DefaultColorsModel = {
     borderColor: "transparent",
     borderWidth: 0,
     textColor: "#CC33FF",
-    textSize: 11,
     backgroundColor: "rgba(204,51,255,0.5)",
     borderRadius: 10,
     canvasColor:
@@ -32,7 +30,6 @@ const defaultColors: DefaultColorsModel = {
     borderColor: "transparent",
     borderWidth: 0,
     textColor: "#FFFFFF",
-    textSize: 11,
     backgroundColor: "rgba(44,44,44,100)",
     borderRadius: 10,
     canvasColor:
@@ -57,7 +54,7 @@ const inputCustomizationEngine: InputCustomizationEngineModel = {
       list: ["Border Color", "Text Color", "Background Color", "Canvas Color"]
     },
     number: {
-      list: ["Border Width", "Border Radius", "Text Size"]
+      list: ["Border Width", "Border Radius"]
     }
   },
   options: {
@@ -108,10 +105,17 @@ const inputOptionsValues: InputCustomization[] = inputValuesGenerator(
   inputCustomizationEngine["options"]
 );
 
+const eventDescriptions = {
+  "current": "These are events that are occurring at the moment.",
+  "upcoming": " These are events that have not yet occurred, but will.",
+  "inactive": "These are events that have already occurred and are not active"
+}
+
 export {
   optionalSettings,
   defaultColors,
   defaultResults,
   inputCustomizationValues,
-  inputOptionsValues
+  inputOptionsValues,
+  eventDescriptions
 };
