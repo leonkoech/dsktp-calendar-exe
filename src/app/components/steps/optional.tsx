@@ -14,8 +14,9 @@ import InputField from "../shared/input";
 type Props = {
   setResults: Function;
   result: DefaultResults;
+  submit: Function;
 };
-const Optional = ({ setResults, result }: Props) => {
+const Optional = ({ setResults, result, submit }: Props) => {
   const [formData, setFormData] = useState({
     maxComponentCount: optionalSettings.maxComponentCount,
     maxFetchCount: optionalSettings.maxFetchCount,
@@ -36,7 +37,8 @@ const Optional = ({ setResults, result }: Props) => {
       ...prev,
       options: formData
     });
-    console.log(result);
+    console.log(result)
+    submit(result);
   };
   return (
     <div className="flex flex-grow w-full flex-col justify-around  items-center p-3 space-x-2 text-sm font-medium text-center">
@@ -48,7 +50,16 @@ const Optional = ({ setResults, result }: Props) => {
         <br></br>
         <br></br>
         <form>
-          {inputOptionsValues.map((input: InputCustomization) => (
+          {inputOptionsValues.map((input: InputCustomization, index: number) => (
+            index == 1?
+            <InputField
+              key={input.id}
+              input={input}
+              formData={formData}
+              handleChange={handleChange}
+              readonly = {true}
+            />
+            :
             <InputField
               key={input.id}
               input={input}

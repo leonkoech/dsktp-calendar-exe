@@ -10,7 +10,7 @@ type CustomConfigurations = {
   borderColor: string;
   borderWidth: number;
   textColor: string;
-  textSize: number;
+  textSize?: number;
   backgroundColor: string;
   borderRadius: number;
   canvasColor: string;
@@ -26,6 +26,7 @@ type InputCustomization = {
   id: keyof (CustomConfigurations | CustomOptions);
   type: string;
   pattern: string | undefined;
+  readonly: boolean | undefined;
 };
 
 type DefaultResults = {

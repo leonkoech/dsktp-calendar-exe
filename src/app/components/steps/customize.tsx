@@ -1,5 +1,6 @@
 import Selector from "./selectors";
 import { DefaultColorsModel, DefaultResults } from "@/app/models/defaultConfigs";
+import  { eventDescriptions } from "@/app/modules/defaultStyles";
 
 type Props={
   type: keyof DefaultColorsModel,
@@ -24,7 +25,7 @@ const Customize = ({
         <span className="text-xl capitalize">{type} Event Customization</span>
         <br></br>
         <span className="text-xs">
-          These are events that have not yet occurred, but will.{" "}
+          {eventDescriptions[type]}
         </span>
       </>
       <Selector
